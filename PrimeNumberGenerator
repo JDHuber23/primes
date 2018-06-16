@@ -1,0 +1,57 @@
+import java.util.*;
+public class PrimeNumberGenerator {
+   public static void main(String[] args) {
+      Scanner console = new Scanner(System.in);
+      System.out.print("Enter the max and min numbers: ");
+      
+      int max = console.nextInt();
+      int min = console.nextInt();
+      primeNumberGenerator(max, min);
+   }
+   
+   public static void primeNumberGenerator(int max, int min) {
+      int notPrime = 1;
+      int prime = 0;
+      int count = 1;
+      int printNotPrimes = 0;
+      Random rand = new Random();
+      
+      while (notPrime == 1) {
+         //generate random number
+         int  p = rand.nextInt((max-min) + 1) + min;
+
+         //check if random number is prime
+         for (double n = 1 ; n <= p/2 & notPrime == 1 ; n++) {
+           
+            // Tests if p/n is an integer value: (p/n) % 1 should equal 0 if p/n results in an integer
+            if (((p / n) % 1) == 0) {
+               // If p / 2 works then move on
+               if (n == 2) {
+                  notPrime = 0;
+                  count++;
+               }
+            
+               // If n does not equal 1 or p, p is not prime               
+               else if (n != p & n != 1) {
+                  if (printNotPrimes == 1) {
+                     System.out.println(p + " is not prime.");
+                  }
+                  notPrime = 0;
+                  count++;
+               }
+            }
+         }
+         if (notPrime == 1) {
+            prime = p;
+            notPrime = 0;
+         }
+         else {
+            notPrime = 1;
+         }
+      //if not prime generate new random number and check again
+      
+      //if prime, print prime number
+      }
+      System.out.print("Here is your prime : " + prime + " after " + count + " run(s)!");
+   }
+}
